@@ -1,28 +1,23 @@
 package stepdefinitions;
 
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
+import io.cucumber.java.en.*;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import utilities.Driver;
 
 import java.time.Duration;
-
 
 public class CommonStepDef {
     WebDriver driver;
     @Given("I open the browser")
     public void i_open_the_browser() {
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        Driver.getDriver();
     }
     @Given("I am on the google homepage")
-
     public void i_am_on_the_google_homepage() {
         driver.get("https://www.google.com");
     }
@@ -48,8 +43,12 @@ public class CommonStepDef {
 
     @Then("I close the browser")
     public void i_close_the_browser() {
+        Driver.closeDriver();
+    }
 
-        driver.close();
+    @Then("I assert something")
+    public void i_assert_something() {
+        Assert.assertTrue(true);
     }
 
 }
